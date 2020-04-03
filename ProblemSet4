@@ -1,0 +1,184 @@
+#1 I believe Biden will win the nomination because he has the most votes at this point
+# and boomers do not think Bernie is electable
+
+#3 Biden has the most votes out of the Democratic nominations
+# Sanders is in second behind Biden
+# Gabbard has the least votes out of all the nominees
+
+import pandas 
+import pandas as pandas
+import mathplotlib.pyplot as plt
+
+#4
+def loadAndCleanData(fileName):
+	data = pd.read_csv(fileName)
+	newData = data.fillna("0")
+	print (newData)
+return newData
+cleanData = loadAndCleanData("democratic2020.csv")
+
+#5
+def normalize(data):
+	data.append(column)
+	name = "Undecided"
+	undecidedList = []
+	for i, v in data.iterrows():
+		undecidedList.append((100 - (v[3] + v[4])))
+	daya["Undecided"] = undecidedList
+return data
+
+#7
+def plotCandidate (self, candidate):
+	x = self.data[candidate].plot.kde()
+	plt.show()
+print (poll.plotCandidate("Biden"))
+
+#8
+def statsPerCandidate(self,candidate):
+	avgInPoll = self[candidate].mean()
+return avgInPoll
+
+#9
+# Biden = 23.5
+# Sanders = 24.9
+# Bloomberg = 12.7
+# Warren = 13.5
+# Buttigieg = 8.4
+# Klobuchar = 4.3
+# Steyer = 2
+# Gabbard = 1.3
+# Undecided =  5.3
+
+candidateList = []
+for candidate in democratic2020.columns:
+	if candidate not in ["Poll", "Date", "Sample", "Spread", "Undecided"]:
+		candidateList.append(candidate)
+print (candidate, statsPerCandidate(candidate, democratic2020))
+
+
+#10 
+def cleanSample(data):
+	LV = []
+	RV = []
+
+	for i in data["Sample"]:
+		LV.append(i[-2:])
+		RV.append(i[:-2])
+	for i in range(len(RV)):
+		if RV[i] == ":
+			RV[i] = 0
+		else:
+			RV[i] = int(RV[i])
+		data["Sample Type"] = LV
+		data["Sample Size"] = RV
+		data = data.replace(", None)
+		return data
+
+#11
+
+cleanSample(democratic2020)
+
+#12
+def computePollWeight(self, pollName):
+	return sum(self[self["Poll"] == pollName]["Sample Size"]) / sum(self["Sample Size"])
+
+computePollWeight(democratic2020, "EmersonEmerson")
+
+computePollWeight(democratic2020, "CNN, CNN")
+
+#13
+def weightedStatsPerCandidate(candidate, self):
+	weighted = []
+	for poll in self["Poll"].unique():
+		x = sum(self[self["Poll"] == poll][candidate])
+		y = computePollWeight(self, poll)
+		weighted.append(x*y)
+	return sum(weighted)/len(weighted)
+
+#14
+weightedStatsPerCandidate("Sanders", democratic2020)
+weightedStatsPerCandidate("Warren", democratic2020)
+weightedStatsPerCandidate("Bloomberg", democratic2020)
+weightedStatsPerCandidate("Biden", democratic2020)
+# Based on these new numbers, I believe Biden will win the nomination
+
+#15 and 16
+def computeCorrelation(candidate1, candidate2, data):
+	print(candidate1, "and" candidate2, "have a correlation of ", data[candidate1],corr(data[candidate2]))
+
+
+
+computeCorrelation("Sanders", "Biden", democratic2020)
+computeCorrelation("Sanders", "Bloomberg", democratic2020) 
+computeCorrelation("Sanders", "Warren", democratic2020)
+computeCorrelation("Sanders", "Buttigieg", democratic2020)
+computeCorrelation("Sanders", "Klobuchar", democratic2020)
+computeCorrelation("Sanders", "Steyer", democratic2020)
+
+computeCorrelation("Biden", "Bloomberg", democratic2020)
+computeCorrelation("Biden", "Warren", democratic2020) 
+computeCorrelation("Biden", "Buttigieg", democratic2020) 
+computeCorrelation("Biden", "Klobuchar", democratic2020) 
+computeCorrelation("Biden", "Steyer", democratic2020)
+
+computeCorrelation("Warren", "Buttigieg", democratic2020) 
+computeCorrelation("Warren", "Klobuchar", democratic2020) 
+computeCorrelation("Warren", "Steyer", democratic2020)
+
+computeCorrelation("Buttigieg", "Klobuchar", democratic2020)
+computeCorrelation("Buttigieg", "Steyer", democratic2020)
+
+computeCorrelation("Klobuchar", "Steyer", democratic2020)
+
+# Steyer and Klobucher are the most correlated
+# Sanders and Biden are the least correlated
+
+#17
+def superTuesday(self, can_list): 
+	sandersST = []
+	bidenST = []
+
+	for i, x in df.iterrows():
+		bidenCount = x["Biden"]
+		sandersCount = x["Sanders"]
+
+	for candidate in can_list:
+		if candidate != "Sanders" and candidate != "Biden":
+			bidencor = computeCorrelation("Biden", candidate, self)
+			sanderscor = computeCorrelation("Sanders", candidate, self)
+
+		if abs(bidencor) > abs(sanderscor):
+			bidenCount += x[candidate]
+
+		else:
+			sandersCount += x[candidate]
+
+	bidenST.append(bidenCount)
+	sandersST.append(sandersCount)
+
+#18
+superTuesday(democratic2020, can_list)
+print("Sanders mean is", int(democratic2020["sandersST"].mean()))
+print("Bidens mean is", int(democratic2020["bidenST"].mean()))
+print("Sanders weighted mean is", int(weightedStatsPerCandidate("Sanders", democratic2020)))
+print("Bidens weighted mean is", int(weightedStatsPerCandidate("Biden", democratic2020)))
+
+# Based on this data, I think Biden will win the nomination
+
+#19
+getConfidenceIntervals(democratic2020["bidenST"])
+getConfidenceIntervals(democratic2020["sandersST"])
+
+#20
+print("Numbers: ", runTTest(democratic2020["Biden"], democratic2020["Sanders"]))
+print("Aggregated Numbers: ", runTTest(democratic2020["bidenST"], democratic2020["sandersST"]))
+
+#
+
+
+
+
+
+
+
+
